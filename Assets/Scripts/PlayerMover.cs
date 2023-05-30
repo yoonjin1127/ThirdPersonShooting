@@ -43,14 +43,19 @@ public class PlayerMover : MonoBehaviour
         moveDir = new Vector3(input.x, 0, input.y);
     }
 
+    
     private void Jump() 
     {
         // y방향으로 계속해서 속력을 받음
         ySpeed += Physics.gravity.y * Time.deltaTime;
 
+        // 원래 CharacterController 컴포넌트에서 IsGrounded 판정을 지원해주지만, 정밀도가 낮기 때문에 잘 사용하지 않음
+        // GroundCheck를 진행했고 ySpeed가 음수일때, ySpeed는 -1dlek
         if (GroundCheck() && ySpeed < 0)
             ySpeed = -1;
 
+        // 위 방향으로 y스피드만큼 날아가게 한다
+        // 델타타임으로 컴퓨터별 속도를 통일시킴
         controller.Move(Vector3.up * ySpeed * Time.deltaTime);    
     }
 
@@ -64,7 +69,8 @@ public class PlayerMover : MonoBehaviour
     private bool GroundCheck()
     {
         RaycastHit hit;
-        // 어디부터, 어느 정도의 둘레로, 어느 방향으로, 얼마만큼의 길이로 쏠건지 설정
+        // SphereCast를 사용하여 구체 형태의 물리 충돌 체크
+        // 어디부터, 어느 정도의 둘레로, 어느 방향으로, 어느 변수에 저장할지, 얼마만큼의 길이로 쏠건지 설정
         return Physics.SphereCast(transform.position + Vector3.up * 1, 0.5f, Vector3.down, out hit, 0.6f);
     }
 }
