@@ -52,6 +52,8 @@ public class FPSCameraController : MonoBehaviour
 
         // 플레이어의 로컬 회전을 설정
         // 플레이어의 좌우 회전을 표현하는 데 사용됨
+        // Transform.Rotation은 게임오브젝트의 상대적인 회전각도를 나타낸다
+        // 게임오브젝트의 부모가 있을 경우 부모를 기준으로 상대적인 회전 각도를 나타낸다
         transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 
