@@ -12,7 +12,7 @@ public class TPSCameraController : MonoBehaviour
     [SerializeField] Transform cameraRoot;
     [SerializeField] float cameraSensitivity;
     [SerializeField] float lookDistance;
-    [SerializeField] Transform aimTarget; 
+    [SerializeField] Transform aimTarget;
 
     private Vector2 lookDelta;
     private float xRotation;
@@ -49,14 +49,16 @@ public class TPSCameraController : MonoBehaviour
         // 그러므로 카메라를 카메라 루트에 맞춰 회전시키고, 그를 플레이어가 바라보게 한다
 
         // lookPoint = 현재 카메라의 위치에서 정면 방향으로 lookDistance만큼 이동한 지점
-        // y를 0으로 제한하여 높이 고정
         // 마지막으로 플레이어를 lookPoint를 향하도록 회전시킴
         Vector3 lookPoint = Camera.main.transform.position + Camera.main.transform.forward * lookDistance;
-        
+
         // 바라보고자 하는 위치를 쏘는 위치로
+        aimTarget.position = lookPoint;
+
+        // aimTarget.position = lookPoint;
         // aimTarget.position = lookPoint;
 
-        lookPoint.y = 0;
+        lookPoint.y = transform.position.y;
         transform.LookAt(lookPoint);
     }
 

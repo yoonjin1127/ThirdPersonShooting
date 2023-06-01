@@ -56,10 +56,11 @@ public class PlayerMover : MonoBehaviour
         controller.Move(transform.right * moveDir.x * moveSpeed * Time.deltaTime);
         
         anim.SetFloat("XSpeed", moveDir.x, 0.5f, Time.deltaTime);
-        anim.SetFloat("YSpeed", moveDir.y, 0.1f, Time.deltaTime);
+        anim.SetFloat("YSpeed", moveDir.z, 0.1f, Time.deltaTime);
         anim.SetFloat("Speed", moveSpeed);
 
-        anim.SetBool("YSpeed", moveDir.sqrMagnitude > 0);
+        //anim.SetBool("YSpeed", moveDir.sqrMagnitude > 0);
+
     }
 
     private void OnMove(InputValue value)
@@ -108,6 +109,6 @@ public class PlayerMover : MonoBehaviour
     {
         isWalking = value.isPressed;
 
-        anim.SetBool("YSpeed", isWalking);
+        //anim.SetBool("YSpeed", isWalking);
     }
 }
